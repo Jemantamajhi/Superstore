@@ -1,0 +1,25 @@
+﻿@model Ebay.Models.SubCategory
+@{
+    Layout ="_AdminLayout";
+}
+
+<h2>Create SubCategory</h2>
+
+<main class="main"id="main">
+    <form asp-action="CreateSubCategory">
+        <div class="form-group">
+            <label for="Name" class="form-label">Name:</label>
+            <input type="text" asp-for="Name" class="form-control" id="Name">
+        </div>
+        <div class="form-group">
+            <label for="CategoryId" class="form-label">Category:</label>
+            <select asp-for="CategoryId" class="form-control" id="CategoryId" asp-items="ViewBag.Categories">
+                <option value="">Select Category</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+        <a asp-action="Dashboard" asp-controller="admin" class="btn btn-secondary">Dashboard</a>
+        <a asp-action="ShowCategory" asp-controller="admin" class="btn btn-secondary">Show Category</a>
+    </form>
+
+</main>

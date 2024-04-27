@@ -1,0 +1,93 @@
+﻿@model Ebay.Models.Product;
+@{
+    Layout = "_AdminLayout";
+}
+
+<main class="main" id="main">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <form asp-action="Product" asp-controller="admin" method="post" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label asp-for="ProductName" class="form-label"></label>
+                                <input type="text" asp-for="ProductName" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Price" class="form-label"></label>
+                                <input type="text" asp-for="Price" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Description" class="form-label"></label>
+                                <input type="text" asp-for="Description" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="CategoryName" class="form-label">Category</label>
+                                <select id="categoryDropdown" class="form-control" asp-for="CategoryId" asp-items="@ViewBag.Categories">
+                                    <option value="">Select Category</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="SubCategoryName" class="form-label">Subcategory</label>
+                                <select asp-for="SubCategoryId" id="subcategoryDropdown" class="form-control">
+                                    <option value="">Select Subcategory</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ImagePath" class="form-label">Image</label>
+                                <input type="file" name="file" asp-for="ImagePath" class="form-control-file">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add</button>
+                            <a asp-action="ProductDetails" asp-controller="admin" class="btn btn-success">View Products</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["Success"]
+        </div>
+    }
+</main>
+<script src="~/lib/jquery/dist/jquery.min.js">
+
+</script>
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            GetSubCategories();
+        });
+        $('#categoryDropdown').change(function () {
+            GetSubCategories();
+        });
+        var GetSubCategories = function () {
+            $.ajax({
+                url: '@Url.Action("GetSubCategories", "admin")',
+                type: 'GET',
+                data: {
+                    categoryId: $("#categoryDropdown").val()
+                },
+                success: function (data) {
+                    $("#subcategoryDropdown").empty(); // Clear existing options
+                    $.each(data, function (index, item) {
+                        $("#subcategoryDropdown").append($('<option>', {
+                            value: item.subCategoryId, // Adjust property name if needed
+                            text: item.name // Adjust property name if needed
+                        }));
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText); // Log any errors to the console
+                }
+            });
+        };
+
+    </script>
+   
+}
+
+

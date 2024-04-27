@@ -1,0 +1,24 @@
+﻿@model List<Ebay.Models.Admin.admin>
+@{
+    ViewData["Title"] = "adminProfile";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<main class="main" id="main">
+    <h1 class="text-center">Admin Profiles</h1>
+    <div class="row">
+        @foreach (var admin in Model)
+        {
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <form method="post">
+                    <input type="hidden" name="Id" value="@admin.Id" />
+                    <input type="text" placeholder="Enter Your Name" name="admin_name" value="@admin.admin_name" class="form-control my-3" />
+                    <input type="text" placeholder="Enter your Username" name="Username" value="@admin.Username" class="form-control my-3" />
+                    <input type="text" placeholder="Enter your Password" name="Password" value="@admin.Password" class="form-control my-3" />
+                    <input type="submit" value="Update Profile" class="form-control my-3 btn btn-primary" />
+                </form>
+            </div>
+            <div class="col-md-2"></div>
+        }
+    </div>
+</main>

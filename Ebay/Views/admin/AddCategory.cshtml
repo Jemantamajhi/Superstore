@@ -1,0 +1,40 @@
+﻿@model Ebay.Models.Category
+@{
+    Layout ="_AdminLayout";
+}
+<main class="main" id="main">
+    <form asp-action="AddCategory" class="needs-validation" novalidate>
+        <div class="form-group">
+            <label for="Name">Category Name:</label>
+            <input type="text" class="form-control" id="Name" name="Name" placeholder="Enter category name" required>
+            <div class="invalid-feedback">
+                Please enter a category name.
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+        <a asp-action="Dashboard" asp-controller="admin" class="btn btn-secondary">Dashboard</a>
+        <a asp-action="ShowCategory" asp-controller="admin" class="btn btn-secondary">Show Category</a>
+    </form>
+
+    <script>
+        // JavaScript to validate form inputs
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+
+
+
+</main>

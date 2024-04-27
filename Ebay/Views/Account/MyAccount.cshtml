@@ -1,0 +1,40 @@
+﻿
+@model Ebay.Models.User;
+
+@{
+    ViewData["Title"] = "MyAccount";
+    Layout = "~/Views/Shared/_headfoot.cshtml";
+}
+
+<h1>My Account</h1>
+
+<!-- Display user details here -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>Password</th>
+            <th>Active</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.Name</td>
+            <td>@Model.UserName</td>
+            <td>@Model.Email</td>
+            <td>@Model.Mobile</td>
+            <td>@Model.Password</td>
+            <td>@Model.IsActive</td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@Model.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+

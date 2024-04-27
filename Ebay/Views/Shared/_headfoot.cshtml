@@ -1,0 +1,303 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+   
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="~/template/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/template/css/style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/template/css/elegant-icons.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/template/css/font-awesome.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/template/css/jquery-ui.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/template/css/magnific-popup.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/template/css/slicknav.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/template/css/owl.carousel.min.css" asp-append-version="true" />
+  
+</head>
+<body>
+    
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="offcanvas__close">+</div>
+        <ul class="offcanvas__widget">
+        <li>
+                <a asp-action="ViewData" asp-controller="Cart">
+                    <span class="icon_bag_alt"></span>
+                    <div class="tip">0</div>
+                </a>
+            </li>
+        </ul>
+        <div class="offcanvas__logo">
+            <a asp-action="UserPage" asp-controller="Account"><img src="~/images/superstore-high-resolution-logo-transparent.png" alt="logo"></a>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+        <div class="offcanvas__auth">
+            @if (Context.User.Identity.IsAuthenticated || Context.Session.GetString("IsAuthenticated") == "true")
+            {
+                <a asp-action="Logout" asp-controller="Account" id="logoutButton">Logout</a>
+            }
+            else
+            {
+                <a href="@Url.Action("Login", "Account")">Login</a>
+                <a href="@Url.Action("Register", "Account")">Register</a>
+            }
+            
+            
+        </div>
+    </div>
+    <!-- Offcanvas Menu End -->
+    <!-- Header Section Begin -->
+    <style>
+        .header-logo {
+            width: 300px; 
+            height: auto; 
+        }
+      
+        .r{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+   
+      
+    </style>
+   
+    <header class="header">
+        <div class="container-fluid">
+            <div class="row r">
+                <div class="col-xl-3 col-lg-2">
+                    <div class="header__logo">
+                        <a asp-action="UserPage" asp-controller="Account">
+                            <img src="~/images/superstore-high-resolution-logo-transparent.png" alt="" class="header-logo">
+                        </a>
+
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-7">
+                    <nav class="header__menu">
+                        <ul>
+                            <li class="active"><a asp-action="UserPage" asp-controller="Account">Home</a></li>
+                            <li>
+                                <a asp-action="Fashion" asp-controller="Products">Fashion</a>
+                                <ul class="dropdown">
+                                    <li><a asp-action="Mens" asp-controller="Products">Men’s</a></li>
+                                    <li><a asp-action="Womens" asp-controller="Products">Women’s</a></li>
+                                    <li><a asp-action="Kids" asp-controller="Products">Kids</a></li>
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a asp-action="Electronics" asp-controller="Products">Electronics</a>
+                                <ul class="dropdown">
+                                    <li><a asp-action="Gaming" asp-controller="Products">Gaming</a></li>
+                                    <li><a asp-action="Laptops" asp-controller="Products">Laptop & Desktop</a></li>
+                                  
+                                    <li><a asp-action="Smartphone" asp-controller="Products"> Smartphones</a></li>
+
+                                </ul>
+                            </li>
+                            <li><a asp-action="Shop" asp-controller="Products">Shop</a></li>
+                            <li><a asp-action="Furniture" asp-controller="Products">Furniture</a></li>
+                            <li><a asp-action="About" asp-controller="Account">About Us</a></li>
+                       
+                            
+                            <li><a asp-action="Contact" asp-controller="Account">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                
+                <div class="col-lg-3">
+                    <div class="header__right ">
+                        <div class="header__right__auth">
+                            @if (Context.User.Identity.IsAuthenticated || Context.Session.GetString("IsAuthenticated") == "true")
+                            {
+                                <a asp-action="Logout" asp-controller="Account" id="logoutButton">Logout</a>
+                            }
+                            else
+                            {
+                                <a asp-action="Login" asp-controller="Account">Login</a>
+                            }
+                            @* @if (Context.Session.GetString("IsAuthenticated") == "true")
+                            {
+                                <a asp-action="Logout" asp-controller="Account" id="logoutButton">Logout</a>
+                            }
+                            else
+                            {
+                                <a asp-action="Login" asp-controller="Account">Login</a> *@
+                            
+                        </div>
+                       
+                        <ul class="header__right__widget">
+                      
+                            <li>
+                                <a asp-action="ViewData" asp-controller="Cart">
+                                    <span class="icon_bag_alt"></span>
+                                    <div class="tip">0</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+         
+           
+           
+            <div class="canvas__open">
+                <i class="fa fa-bars"></i>
+            </div>
+            
+        </div>
+         
+            <style>
+ 
+                    .s {
+                        margin-left: 40%;
+                       
+                        padding: 3px;
+                    }
+
+           
+
+           
+                
+            </style>
+            <form action="/Products/Shop" method="get" class="form-inline s">
+                <label for="searchInput" class="sr-only">Search</label>
+                <input id="searchInput" class="form-control mr-sm-2" type="search" name="find" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+
+      
+      
+    </header>
+
+    <!-- JavaScript to clear browser history after logout -->
+    <script>
+        function clearBrowserHistory() {
+            window.history.forward(1); // Move forward one step to clear history
+        }
+
+        // Call clearBrowserHistory after logout
+        document.getElementById('logoutButton').addEventListener('click', function () {
+            clearBrowserHistory();
+        });
+
+        
+    </script>
+
+
+
+    <div>
+        @RenderBody()
+    </div>
+
+    <!-- Footer Section Begin -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-7">
+                    <div class="footer__about">
+                       
+                        <div class="footer__logo">
+                            <a asp-action="UserPage" asp-controller="Account">
+                                <img src="~/images/superstore-high-resolution-logo-transparent.png" />
+                            </a>
+                            
+                        </div>
+                        
+                        <p>
+                            SuperStore is your one-stop destination for all your shopping needs. Whether you're in search of the latest fashion trends, stylish furniture pieces, cutting-edge electronics, high-quality sports gear, or any other product, we've got you covered.
+                        </p>
+                      
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-5">
+                    <div class="footer__widget">
+                        <h6>Quick links</h6>
+                        <ul>
+                            <li><a asp-action="About" asp-controller="Account">About</a></li>
+                            <li><a asp-action="AdminLogin" asp-controller="admin">Admin</a></li>
+                            <li><a asp-action="Contact" asp-controller="Account">Contact</a></li>
+                            <li><a asp-action="Faq" asp-controller="Account">FAQ</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-4">
+                    <div class="footer__widget">
+                       
+                        <ul>
+                            @if (Context.User.Identity.IsAuthenticated || Context.Session.GetString("IsAuthenticated") == "true")
+                            {
+                                <li><a asp-action="MyAccount" asp-controller="Account" )>Account</a></li>
+                            }
+                           
+                            <li><a href="#">Orders Tracking</a></li>
+                            <li><a href="#">Checkout</a></li>
+                            <li><a href="#">Wishlist</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-8 col-sm-8">
+                    <div class="footer__newslatter">
+                        
+                        <div class="footer__social">
+                            <a href="https://www.facebook.com/profile.php?id=61558543283456"><i class="fa fa-facebook"></i></a>
+                            
+                     
+                            <a href="https://www.instagram.com/codementor_06/"><i class="fa fa-instagram"></i></a>
+                            
+                        </div>
+                        <br /><br />
+
+                        <div class="footer__payment">
+                            <a href="#"><img src="~/template/img/payment/payment-1.png" alt=""></a>
+                            <a href="#"><img src="~/template/img/payment/payment-2.png" alt=""></a>
+                            <a href="#"><img src="~/template/img/payment/payment-3.png" alt=""></a>
+                            <a href="#"><img src="~/template/img/payment/payment-4.png" alt=""></a>
+                            <a href="#"><img src="~/template/img/payment/payment-5.png" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    <div class="footer__copyright__text">
+                        <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
+                    </div>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
+    </div>
+
+    <!-- Js Plugins -->
+    <script src="~/template/js/jquery-3.3.1.min.js"></script>
+    <script src="~/template/js/bootstrap.min.js"></script>
+    <script src="~/template/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/template/js/jquery-ui.min.js"></script>
+    <script src="~/template/js/mixitup.min.js"></script>
+    <script src="~/template/js/jquery.countdown.min.js"></script>
+    <script src="~/template/js/jquery.slicknav.js"></script>
+    <script src="~/template/js/owl.carousel.min.js"></script>
+    <script src="~/template/js/jquery.nicescroll.min.js"></script>
+    <script src="~/template/js/main.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

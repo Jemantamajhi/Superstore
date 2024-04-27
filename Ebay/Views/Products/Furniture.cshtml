@@ -1,0 +1,42 @@
+﻿@model List<Product>;
+@{
+    ViewData["Title"] = "Superstore";
+    Layout = "~/Views/Shared/_headfoot.cshtml";
+}
+
+
+
+<section class="shop spad">
+    <div class="container">
+        <div class="row">
+            @foreach (var product in Model)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <div class="product__item">
+                        <div class="product__item__pic">
+                            <img src="/Image/@product.ImagePath" class="img-fluid" alt="@product.ProductName">
+                            <div class="label new">New</div>
+                            <ul class="product__hover">
+                                <li><a href="/Image/@product.ImagePath" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                                <li><a href="#"><span class="icon_bag_alt"></span></a></li>
+                            </ul>
+                        </div>
+                        <div class="product__item__text">
+                            <h6><a href="#">@product.ProductName</a></h6>
+                            <!-- Remove rating -->
+                            <div class="product__price">₹ @product.Price</div>
+                            <!-- Add to Cart button -->
+                          @*   <form asp-action="AddToCart" asp-controller="Cart" method="post">
+                                <input type="hidden" name="productId" value="@product.ProductId" />
+                                <button type="submit" class="btn btn-primary btn-block">Add to Cart</button>
+                            </form> *@
+
+                            <a asp-action="AddToCart" asp-controller="Cart" asp-route-id="@product.ProductId" class="btn btn-primary btn-block">Add To Cart</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

@@ -1,0 +1,64 @@
+﻿@model CartViewModel;
+@{
+    ViewData["Title"] = "ViewData";
+    Layout = "~/Views/Shared/_headfoot.cshtml";
+}
+
+
+
+<a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Shop">Add More Item</a>
+<table class="table">
+    <thead>
+    <th>Image</th>
+    <th>Product Name</th>
+    <th>Price</th>
+   
+    <th>Quantity</th>
+    <th>Total Price</th>
+    <th>Total</th>
+
+    <th></th>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.CartItems)
+        {
+            <tr>
+                <td>
+                    @if (item.Product != null)
+                    {
+                        <img src="~/Image/@item.Product.ImagePath" style="height: 100px; width: 100px;">
+                    }
+                    else
+                    {
+                        <!-- Handle case where Product is null -->
+                        <span>Product Image Not Available</span>
+                    }
+                </td>
+                <td>@item.Product.ProductName</td>
+                <td>@item.Product.Price</td>
+               @*  <td>@item.Products.Des</td> *@
+                <td>@item.Quantity</td>
+                <td>@((item.Product.Price * item.Quantity).ToString("C"))</td>
+                <input type="hidden" value="@item.Product.ProductId">
+                <td>
+                    <a asp-controller="Cart" asp-action="RemoveData" asp-route-id="@item.Product.ProductId">Remove</a>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Total:</td>
+            <td>@Model.Totalprice?.ToString("C")</td>
+        </tr>
+    </tbody>
+
+</table>
+@if (Context.User.Identity.IsAuthenticated || Context.Session.GetString("IsAuthenticated") == "true"){
+    <a href="@Url.Action("Orderdetails", "Cart")" class="btn btn-primary">Checkout</a>
+}
+else
+{
+    <p>Please <a href="/Account/Login">login</a> to place an order.</p>
+}
